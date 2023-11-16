@@ -1,25 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { FlexContainer } from './ui-kit/container';
+import styles from './index.module.scss';
+import { Textarea } from './ui-kit/text-area';
+import { useState } from 'react';
+import { Button } from './ui-kit/button';
 
 function App() {
+  const [text, setText] = useState('');
+
+  const onTextChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setText(event.target.value);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <FlexContainer fullPage centered>
+      <FlexContainer customClass={styles.formContainer}>
+        <Textarea placeholder="Enter the text" onChange={onTextChange} value={text} />
+
+        <Button label="Submit" onClick={() => console.log(text)} />
+      </FlexContainer>
+    </FlexContainer>
   );
 }
 
